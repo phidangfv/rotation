@@ -22,3 +22,12 @@ export const segments = [
   "AMAZON GIFT VOUCHER WORTH 1000AED",
   "APPLE AIRPODS PRO",
 ];
+export const phoneSegments = [
+  "123456789",
+  "123456788",
+  "123456787",
+  "123456786",
+  "123456785",
+  "123456784",
+  "123456783",
+];

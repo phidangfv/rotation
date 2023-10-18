@@ -1,12 +1,12 @@
 import React from "react";
-import LogoMain from "../assets/LogoMain";
 import { styled } from "styled-components";
+import LogoMain from "../assets/LogoMain";
 
-const HeaderModal = () => {
+const HeaderModal = ({ text }) => {
   return (
     <Container>
       <LogoMain size="80" />
-      <Text>Chúc Mừng Bạn Đã Chiến Thắng</Text>
+      <Text>{text ? text : "Chúc Mừng Bạn Đã Chiến Thắng"}</Text>
     </Container>
   );
 };
