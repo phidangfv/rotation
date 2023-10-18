@@ -1,7 +1,12 @@
-.App {
+.body {
+  /* font-family: sans-serif; */
+  /* text-align: center; */
+  /* box-sizing: border-box; */
+}
+/* .App {
   font-family: sans-serif;
   text-align: center;
-}
+} */
 .center {
   position: absolute;
   left: 50%;
@@ -32,19 +37,15 @@
   text-align: center;
   font-size: 32px;
 }
-.closeContainer {
-  display: flex;
-  justify-content: center;
-}
 .closepankaj {
   margin-top: 30px;
   width: 240px;
   height: 54px;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 24px;
   color: #fff;
   border: none;
   outline: none;
-  background: #2466ff;
-  border-radius: 5px;
+  background: #3b82f6;
+  border-radius: 8px;
 }

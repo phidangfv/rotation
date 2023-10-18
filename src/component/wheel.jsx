@@ -8,7 +8,7 @@ const WheelComponent = ({
   primaryColor,
   contrastColor,
   buttonText,
-  isOnlyOnce
+  isOnlyOnce,
 }) => {
   let currentSegment = "";
   let isStarted = false;
@@ -192,26 +192,24 @@ const WheelComponent = ({
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = primaryColor || "black";
-    ctx.font = "bold 1.5em proxima-nova";
+    ctx.font = "bold 2.5em proxima-nova";
     currentSegment = segments[i];
-    isStarted &&
+    isFinished &&
       ctx.fillText(currentSegment, centerX + 10, centerY + size + 50);
   };
   const clear = () => {
     const ctx = canvasContext;
-    ctx.clearRect(0, 0, 1000, 800);
+    ctx.clearRect(0, 0, 1000, 500);
   };
   return (
-    <div id="wheel">
-      <canvas
-        id="canvas"
-        width="1000"
-        height="800"
-        style={{
-          pointerEvents: isFinished && !isOnlyOnce ? "none" : "auto"
-        }}
-      />
-    </div>
+    <canvas
+      id="canvas"
+      width="600"
+      height="600"
+      style={{
+        pointerEvents: isFinished && !isOnlyOnce ? "none" : "auto",
+      }}
+    />
   );
 };
 export default WheelComponent;
