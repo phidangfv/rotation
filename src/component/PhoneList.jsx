@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "react-wheel-of-prizes/dist/index.css";
 import { styled } from "styled-components";
@@ -7,29 +7,58 @@ import useModal from "../hook/useModal";
 import HeaderModal from "./HeaderModal";
 import TrPortal from "./TrPortal";
 
-const PhoneList = () => {
-  const [data, setData] = useState("");
+const PhoneList = ({
+  luckyModal,
+  setPhones,
+  phones,
+  setPhonesOpt,
+  setPhoneColor,
+}) => {
   const modal = useModal();
-  const handleChange = (e) => {
-    setData(e.target.value);
-  };
+  const handleForm = () => {
+    // const text = "123,456,789,321,645";
+    const values = phones.split(",");
+    setPhonesOpt && setPhonesOpt(values);
+    const arr = [];
+    const colors = [
+      "#EE4041",
+      "#F0CF51",
+      "#815CD1",
+      "#3DA5E1",
+      "#34A241",
+      "#94A241",
+    ];
+    values.forEach((el) => {
+      const item = colors.shift();
+      arr.push(item);
+      colors.push(item);
+    });
 
+    setPhoneColor(arr);
+    modal.hide();
+  };
+  const handleChange = (e) => {
+    setPhones(e.target.value);
+  };
   return (
     <Container>
       <button className="button-primary" onClick={modal.show}>
         <LogoMain size={24} /> Nhập SĐT
+      </button>
+      <button className="button-primary" onClick={luckyModal.show}>
+        <LogoMain size={24} /> Danh Sách SĐT May Mắn
       </button>
       {modal.visible && (
         <TrPortal open={modal.visible}>
           <Wrapper>
             <HeaderModal text="Danh Sách Số Điện Thoại May Mắn" />
             <ScLabel>Danh sách số điện thoại:</ScLabel>
-            <ScTextarea onChange={handleChange} value={data} />
+            <ScTextarea onChange={handleChange} value={phones} />
             <ScButtons>
               <button className="button-primary" onClick={modal.hide}>
                 Huỷ
               </button>
-              <button className="button-primary" onClick={modal.hide}>
+              <button className="button-primary" onClick={handleForm}>
                 Xác Nhận
               </button>
             </ScButtons>
@@ -45,7 +74,8 @@ export default PhoneList;
 const Container = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 50%;
+  width: 80%;
+  gap: 10px;
 `;
 const ScButtons = styled.div`
   display: flex;

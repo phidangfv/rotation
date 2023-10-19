@@ -4,7 +4,7 @@ import IMAGES from "./assets";
 import "react-wheel-of-prizes/dist/index.css";
 
 import { styled } from "styled-components";
-import { GiftRotation, PhoneList } from "./component";
+import { PhoneRotation } from "./component";
 
 const App = () => {
   return (
@@ -13,9 +13,8 @@ const App = () => {
         background: `url(${IMAGES.background})`,
       }}
     >
-      {/* <PhoneRotation /> */}
-      <GiftRotation />
-      <PhoneList />
+      <PhoneRotation />
+      {/* <GiftRotation /> */}
     </Container>
   );
 };

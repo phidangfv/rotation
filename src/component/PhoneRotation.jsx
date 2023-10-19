@@ -9,12 +9,20 @@ import useModal from "../hook/useModal";
 import { phoneWeelColors } from "../lib/utils";
 import { phoneSegments } from "../localstore";
 import HeaderModal from "./HeaderModal";
+import LuckyList from "./LuckyList";
+import PhoneList from "./PhoneList";
 import TrPortal from "./TrPortal";
 import WheelComponent from "./wheel";
 
 const PhoneRotation = () => {
   const modal = useModal();
+  const luckyModal = useModal();
   const [show, setShow] = useState(false);
+  const [phones, setPhones] = useState("");
+  const [phonesOpt, setPhonesOpt] = useState();
+  const [phoneColor, setPhoneColor] = useState();
+  const [luckyNum, setLuckyNum] = useState([]);
+
   const phoneSegColors = phoneWeelColors();
   const onFinished = (winner) => {
     console.log("winner", winner);
@@ -22,24 +30,50 @@ const PhoneRotation = () => {
     modal.show();
   };
   const handleOk = () => {
-    modal.hide();
+    const valPhones = phonesOpt.filter((item) => item !== show);
+    setPhonesOpt(valPhones);
+    setPhones(valPhones?.toString());
+    if (show && !luckyNum.includes(show)) {
+      setLuckyNum((prev) => [...prev, show]);
+    }
     setShow(false);
+
+    modal.hide();
   };
-  const text = "123,456,789,321,645";
-  const values = text.split(",");
-  console.log("values", values);
   return (
     <>
       {show && <ScConfetti />}
 
-      <WheelComponent
-        segments={phoneSegments}
-        segColors={phoneSegColors}
-        onFinished={(winner) => onFinished(winner)}
-        primaryColor="#3b82f6"
-        contrastColor="white"
-        buttonText="Finviet"
-        isOnlyOnce={true}
+      {phonesOpt && phoneColor ? (
+        <WheelComponent
+          key={JSON.stringify(phonesOpt)}
+          segments={phonesOpt}
+          segColors={phoneColor}
+          onFinished={(winner) => onFinished(winner)}
+          primaryColor="#3b82f6"
+          contrastColor="white"
+          buttonText="Finviet"
+          isOnlyOnce={true}
+        />
+      ) : (
+        <WheelComponent
+          key={JSON.stringify(phoneSegments)}
+          segments={phoneSegments}
+          segColors={phoneSegColors}
+          onFinished={(winner) => onFinished(winner)}
+          primaryColor="#3b82f6"
+          contrastColor="white"
+          buttonText="Finviet"
+          isOnlyOnce={true}
+        />
+      )}
+
+      <PhoneList
+        setPhones={setPhones}
+        phones={phones}
+        setPhonesOpt={setPhonesOpt}
+        setPhoneColor={setPhoneColor}
+        luckyModal={luckyModal}
       />
       {modal.visible && (
         <TrPortal open={modal.visible}>
@@ -57,6 +91,9 @@ const PhoneRotation = () => {
             </ScButtons>
           </Wrapper>
         </TrPortal>
+      )}
+      {luckyModal.visible && (
+        <LuckyList luckyModal={luckyModal} luckyNum={luckyNum} />
       )}
     </>
   );
