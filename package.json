@@ -7,8 +7,8 @@
     "starter"
   ],
   "scripts": {
-    "start": "react-scripts start",
-    "deploy": "react-scripts --openssl-legacy-provider start",
+    "local": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
